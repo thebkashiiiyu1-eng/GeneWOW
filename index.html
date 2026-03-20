@@ -3,176 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World | GeneWOW Premium</title>
+    <title>GENEWOW | The Living Laboratory</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&family=Inter:wght@300;400;600&family=Prompt:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --secondary: #a855f7;
-            --accent: #ec4899;
-            --bg: #030712;
-            --text: #f9fafb;
+            /* The Living Laboratory Color Palette */
+            --primary: #004253;
+            --primary-container: #005b71;
+            --surface: #f8f9fa;
+            --surface-container-low: #f3f4f5;
+            --surface-container-lowest: #ffffff;
+            --on-surface: #191c1d;
+            --secondary: #4a6267;
+            --tertiary: #553600;
+            --tertiary-fixed: #ffddb3;
+            --outline-variant: rgba(191, 200, 204, 0.15); /* Ghost Border */
+            
+            /* Spacing Tokens */
+            --spacing-6: 1.5rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --radius-xl: 1.5rem;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
-            height: 100vh;
+            background-color: var(--surface);
+            color: var(--on-surface);
+            font-family: 'Inter', 'Prompt', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography Hierarchy */
+        h1, h2, h3, .display-text {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Header / Navigation (Glassmorphism) */
+        header {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-xl);
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
+            z-index: 1000;
+            /* No 1px border rule applied here - using shift and shadow atmospheric glow */
+            box-shadow: 0 48px 48px -12px rgba(0, 66, 83, 0.06);
         }
 
-        /* Ambient Background Elements */
-        .ambient-orb {
-            position: absolute;
-            width: 60vw;
-            height: 60vw;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: -1;
-            opacity: 0.2;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-
-        .orb-1 {
-            background: var(--primary);
-            top: -10%;
-            left: -10%;
-        }
-
-        .orb-2 {
-            background: var(--accent);
-            bottom: -10%;
-            right: -10%;
-            animation-delay: -5s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(10%, 10%) scale(1.1); }
-        }
-
-        /* Container */
-        .main-container {
-            text-align: center;
-            z-index: 10;
-            animation: zoomIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Premium "Hello World" Text */
-        h1 {
-            font-size: clamp(4rem, 15vw, 10rem);
-            font-weight: 900;
-            letter-spacing: -4px;
-            line-height: 0.9;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.4) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-        }
-
-        h1::after {
-            content: "GENEWOW";
-            position: absolute;
-            left: 0;
-            top: 4px;
-            z-index: -1;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.5;
-            filter: blur(15px);
-            animation: moveGradient 4s linear infinite;
-        }
-
-        @keyframes moveGradient {
-            to { background-position: 200% center; }
-        }
-
-        .sub-text {
+        .logo {
             font-size: 1.25rem;
-            color: #94a3b8;
-            letter-spacing: 4px;
+            font-weight: 800;
+            color: var(--primary);
             text-transform: uppercase;
-            font-weight: 300;
-            opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
-            animation-delay: 1.2s;
+            letter-spacing: 0.1em;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--secondary);
         }
 
-        /* Particle Overlay */
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.3;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            text-align: center;
+            background: radial-gradient(circle at 10% 20%, rgba(0, 66, 83, 0.03) 0%, transparent 50%);
         }
 
-        /* GitHub Link Style */
-        .github-tag {
-            position: absolute;
-            bottom: 2rem;
-            color: rgba(255,255,255,0.3);
+        .label-micro {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--tertiary);
+            background: var(--tertiary-fixed);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(4rem, 12vw, 9rem);
+            line-height: 0.9;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            /* Intentional Asymmetry would be hard to center, but we'll use strong anchor */
+        }
+
+        .hero-sub {
+            font-size: 1.25rem;
+            max-width: 600px;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+        }
+
+        /* Signature Gradient CTA */
+        .cta-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
+            color: white;
+            padding: 1.25rem 3rem;
+            border-radius: 0.75rem;
             text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            font-weight: 700;
+            font-family: 'Manrope', sans-serif;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgba(0, 66, 83, 0.2);
+        }
+
+        /* Sectioning with background shift (No-Line Rule) */
+        .section-split {
+            background-color: var(--surface-container-low);
+            padding: var(--spacing-12) 2rem;
+        }
+
+        .grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        /* Surface Tiered Cards */
+        .card {
+            background-color: var(--surface-container-lowest);
+            padding: var(--spacing-10);
+            border-radius: var(--radius-xl);
+            /* Depth achieved via layering + atmospheric glow */
+            box-shadow: 0 48px 48px -12px rgba(0, 66, 83, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+
+        /* DNA Watermark (Subtle) */
+        .watermark {
+            display: block;
+            margin: 0 auto;
+            opacity: 0.03;
+            width: 200px;
+            pointer-events: none;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: var(--surface);
+        }
+
+        .github-tag {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            opacity: 0.6;
+            transition: opacity 0.3s;
         }
 
         .github-tag:hover {
-            color: #fff;
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 4rem; }
+            header { top: 0; width: 100%; border-radius: 0; padding: 1rem; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="ambient-orb orb-1"></div>
-    <div class="ambient-orb orb-2"></div>
+    <header>
+        <div class="logo">GENEWOW</div>
+        <div class="nav-links">
+            <span>LABORATORY</span>
+            <span>GENETICS</span>
+            <span>RESEARCH</span>
+        </div>
+    </header>
 
-    <div class="main-container">
+    <section class="hero">
+        <div class="label-micro">The Living Laboratory</div>
         <h1>GENEWOW</h1>
-        <div class="sub-text">PREMIUM EXPERIENCE • thebkashiiiyu1-eng</div>
+        <p class="hero-sub">Where clinical precision meets organic pet husbandry. Bringing the sophisticated world of DNA sequencing to every breeder.</p>
+        <a href="https://github.com/thebkashiiiyu1-eng/GeneWOW" class="cta-btn">EXPLORE THE GENOME</a>
+        
+        <div style="margin-top: 5rem;">
+            <svg class="watermark" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+            </svg>
+        </div>
+    </section>
+
+    <div class="section-split">
+        <div class="grid">
+            <div class="card">
+                <h3>Editorial Precision</h3>
+                <p>Designed as a series of high-end surfaces that feel like a premium scientific journal brought to life.</p>
+            </div>
+            <div class="card">
+                <h3>Scientific Authority</h3>
+                <p>Oceanic teals and architectural grays establish a sense of clinical trust and authority.</p>
+            </div>
+        </div>
     </div>
 
-    <a href="https://github.com/thebkashiiiyu1-eng/GeneWOW" class="github-tag" target="_blank">View on GitHub Archive</a>
-
-    <script>
-        // Mouse parallax effect
-        document.addEventListener('mousemove', (e) => {
-            const orbs = document.querySelectorAll('.ambient-orb');
-            const x = (e.clientX / window.innerWidth - 0.5) * 40;
-            const y = (e.clientY / window.innerHeight - 0.5) * 40;
-            
-            orbs.forEach((orb, i) => {
-                const depth = i === 0 ? 1 : 1.5;
-                orb.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
-            });
-        });
-    </script>
+    <footer>
+        <a href="https://github.com/thebkashiiiyu1-eng/GeneWOW" class="github-tag" target="_blank">GENEWOW ARCHIVE @thebkashiiiyu1-eng</a>
+        <p style="font-size: 0.75rem; margin-top: 1rem; color: var(--secondary); opacity: 0.5;">© 2026 Crafted with The Living Laboratory Design System</p>
+    </footer>
 </body>
 </html>
